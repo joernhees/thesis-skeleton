@@ -1,0 +1,417 @@
+%
+% Hi,
+% after reading through the Introduction of the thesis.pdf welcome to its source.
+% This is the main file for your thesis.
+% It mainly loads other things and gets the settings right.
+%
+% Before going on a word about editing latex:
+% - encoding: use utf8 encoding, no excuse. If your editor can't use another one.
+% - revision control: you want it, it saves your life, no matter which one (i suggest git / mercurial)
+% 
+% Especially important with multiple authors:
+% - revision control: most of them use line based diffs
+%                     In text (not code) i suggest to write one sentence per line (so hit ENTER after each sentence).
+%                     Use dynamic word wrapping in your editor so you don't have to scroll all the time.
+%                     This eases merging and does not show a lot of diffs just due to reformatting (as with static word wrapping).
+%
+% I wrote my thesis in English and so should you if you ever want to reuse or publish your results (or parts of it).
+% Even in the English thesis you might want to include a German abstract and your "Erklärung" has to be in German anyhow, which will be mentioned in the comments below.
+% If you still want to write it in German: no problem there are just a few things to change in this file which will also be mentioned in the comments.
+%
+% So how to start?
+% Go through this file, it includes quite a lot of packages which you might want to use or not.
+% Below all the packages you'll find the \begin{document} line.
+% Underneath it insert your title, subtitle, name, supervisors, etc.
+% Then have a look into the files it includes (starting with abstract, etc.
+% 
+% A "how to find documentation" tip:
+% Usually you can quickly find help for some package by typing:
+% texdoc packagename
+% into your terminal.
+% try: texdoc scrbook
+% 
+% 
+% 
+% Jörn
+%
+% PS:
+% read this: ftp://ftp.dante.de/tex-archive/info/l2tabu/german/l2tabu.pdf
+
+\RequirePackage{fix-cm} % see: http://tug.org/texmf-dist/doc/latex/base/fixltx2e.pdf
+\documentclass[a4paper, twoside, BCOR=10mm]{scrbook} % see docs!
+
+%\usepackage[ngerman]{babel} % if your whole thesis is German uncomment
+%%\usepackage{ngerman} % actually deprecated by babel package with ngerman option (line above), do not uncomment
+\usepackage[ngerman, USenglish]{babel} % main language comes last!
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % modern fonts
+%\usepackage{textcomp}
+\usepackage{fixltx2e} % some other fixes
+
+\usepackage[utf8]{inputenc} % This is the only plausible encoding. if you can't read äöüß now, CHANGE YOUR EDITOR's ENCODING, DO NOT CHANGE THIS LINE (only exception: on some systems it's utf8x, so in case you get an error try that)
+
+\usepackage{scrhack} % some fixes for the scr-classes
+
+%\usepackage[german]{varioref} % References with page numbers
+\usepackage{varioref} % References with page numbers (use \vref instead of \ref)
+
+% \usepackage[printonlyused,withpage]{acronym}
+\usepackage{acronym} % acronyms, first occurrence will be expanded, all further just acronym + acronym table in appendix
+
+%\usepackage{setspace} % (usually not a good idea)
+%\doublespacing
+%\onehalfspacing
+
+% für das Euro symbol (\euro{}) oder Beträge: \EUR{47,11}
+\usepackage{eurosym}
+
+% \usepackage{floatflt} %floating figures (Figures/Tables, surrounded by text)
+\usepackage{subfigure} % multiple figures (and references in one figure)
+
+\usepackage{graphicx} % to import graphics
+
+
+%\usepackage{qtree} % draw trees in latex
+
+% \usepackage[active]{srcltx} % deprecated: ForwardDVI find current position in .dvi
+% (ForwardPDF) current Editors/Distributions use pdflatex with option -interaction=nonstopmode -synctex=1 '%source'
+
+% in case urls are included
+\usepackage{url}
+%\usepackage{hyperref} % clickable links
+\usepackage[colorlinks=true,
+            linkcolor=black,
+            anchorcolor=black,
+            citecolor=black,
+            filecolor=black,
+            menucolor=black,
+            runcolor=black,
+            urlcolor=black]{hyperref} % without all those nasty colored boxes in pdf viewer
+
+
+
+% math stuff
+
+\usepackage{amsmath}
+%\usepackage{mathtools}
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{eulervm}
+
+%\DeclareMathSymbol{\R}{\mathalpha}{AMSb}{"52} % nasty like this, use the following lines
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\colonequals}{\mathrel{\mathop:}=}
+
+
+% coding stuff
+
+\usepackage{color} % used by listings for syntax highlighting
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.6,0,0}
+\definecolor{darkgreen}{rgb}{0,.6,0}
+\definecolor{red}{rgb}{.98,0,0}
+
+\usepackage{verbatim}
+\usepackage{listings} % for code snippets, see docs
+\renewcommand{\lstlistlistingname}{List of Listings}
+\lstset{
+	commentstyle=\itshape\color{darkgreen},
+	keywordstyle=\bfseries\color{darkblue},
+	stringstyle=\color{darkred},
+	showspaces=false,
+	showtabs=false,
+	showstringspaces=false,
+% 	xleftmargin=1cm,
+	columns=fixed,
+	frame=single,
+	basicstyle=\ttfamily\small,
+	language=Python,
+	breaklines=true,
+	tabsize=3,
+% 	numbers=left,
+% 	numberfirstline=true,
+%	firstnumber=0,
+% 	stepnumber=5,
+	extendedchars=true,
+	captionpos=b,
+}
+
+% if you want line numbers like 1,5,10,15,... here's a hack (thanks to kaste in #latex on freenode):
+% \lstset{numbers=left, numberstyle=\tiny, stepnumber=5, numbersep=5pt, numberfirstline=true}
+% \begin{document}
+% \hbox to 0pt{\begin{lstlisting}[firstnumber=0, name=test]
+%         
+% \end{lstlisting}}
+% \begin{lstlisting}[name=test]
+% for i:=maxint to 0 do
+% begin
+%      { do nothing }
+% end;
+% more
+% crap
+% for i:=maxint to 0 do
+% begin
+%      { do nothing }
+% end;
+% more
+% crap\end{lstlisting}
+% \end{document}
+
+
+\usepackage{paralist} % provides inline lists (so an enumeration inline in a paragraph with \begin{inparaenum}[(i)]...\end{...}
+
+\usepackage{rotating} % e.g., if you want a landscape figure
+
+% array stuff
+\usepackage{array}
+\usepackage{longtable} % multi-page tables
+\usepackage{tabularx}
+\usepackage{tabulary}
+\usepackage{multirow} % cells spanning multiple rows
+\usepackage{multicol} % cells spanning multiple columns
+
+\KOMAoption{toc}{bib,idx} %,listof} % what is part of the Table Of Contents? (needs to be defined after listings package but before natbit!)
+
+%\usepackage{bibgerm}
+%\usepackage{authordate1-4}
+\usepackage[square]{natbib} % use the natbib library package, see docs!
+%\bibpunct[,]{[}{]}{;}{a}{,}{,} %[notesep],open,close,citesep,style,aysep, yysep
+\renewcommand{\cite}{\citep} % by default use natbib's citep wherever we write \cite{...}
+
+
+%\usepackage{lineno} % sometimes useful for reviews
+%%\linenumbers
+%\pagewiselinenumbers
+%\modulolinenumbers[5]
+%\switchlinenumbers % Doppelseitig außen (\switchlinenumbers* % Doppelseitig innen)
+
+
+% word index -> page numbers for appendix.
+\makeindex
+\usepackage{makeidx}
+
+
+% sometimes useful to just get some random text on a page
+%\usepackage{blindtext} % for sampletext (notice that you need to use \usepackage[english]{babel} with this)
+
+
+
+
+
+% NICE TO KNOW:
+% Befehl: (a, b are words)
+% a.\ b    A non-expandable space (e.g., c.f.~here) (usually you should use this after abbreviation "."s
+% a~b      A non-breakable space between a and b (e.g., Figure~\ref{fig:blabla})
+% a\,b     Small space (e.g., with Web\,2.0)
+% a\-b     Hyphenation: only at this point
+% a"-b     Hyphenation: additionaly at this point
+% a""b     Hyphenation: at this point without hyphen
+% a-b      Hyphenation: always print a hyphen, permitting no other hyphenations
+% a"~b     Hyphenation: hyphen here, but no hyphenation allowed at it
+% a"=b     Hyphenation: always print a hyphen here but allow other hyphenations
+% ``a''    English caps
+% "`a"'    German caps
+
+% howto use varioref:
+% \vref{} instead of \ref{}
+
+% howto use natbib:
+% \citet{jon90}               ⇒ Jones et al. (1990)
+% \citet[chap.~2]{jon90}      ⇒ Jones et al. (1990, chap. 2)
+% \citep{jon90}               ⇒ (Jones et al., 1990)
+% \citep[chap.~2]{jon90}      ⇒ (Jones et al., 1990, chap. 2)
+% \citep[see][]{jon90}        ⇒ (see Jones et al., 1990)
+% \citep[see][chap.~2]{jon90} ⇒ (see Jones et al., 1990, chap. 2)
+% \citet*{jon90}              ⇒ Jones, Baker, and Williams (1990)
+% \citep*{jon90}              ⇒ (Jones, Baker, and Williams, 1990)
+% \citealt{jon90}             ⇒ Jones et al. 1990
+% \citealt*{jon90}            ⇒ Jones, Baker, and Williams 1990
+% \citealp{jon90}             ⇒ Jones et al., 1990
+% \citealp*{jon90}            ⇒ Jones, Baker, and Williams, 1990
+% \citealp{jon90,jam91}       ⇒ Jones et al., 1990; James et al., 1991
+% \citealp[pg.~32]{jon90}     ⇒ Jones et al., 1990, pg. 32
+% \citenum{jon90}             ⇒ 11
+% \citetext{priv.\ comm.}     ⇒ (priv. comm.)
+% \citeauthor{jon90}          ⇒ Jones et al.
+% \citeauthor*{jon90}         ⇒ Jones, Baker, and Williams
+% \citeyear{jon90}            ⇒ 1990
+% \citeyearpar{jon90}         ⇒ (1990)
+% \citet{dRob98}              ⇒ della Robbia (1998)
+% \Citet{dRob98}              ⇒ Della Robbia (1998)
+% \Citep{dRob98}              ⇒ (Della Robbia, 1998)
+% \Citealt{dRob98}            ⇒ Della Robbia 1998
+% \Citealp{dRob98}            ⇒ Della Robbia, 1998
+% \Citeauthor{dRob98}         ⇒ Della Robbia
+
+
+
+%\hyphenation{My-word-which-shall-always-only-be-seperated-here and-another-word and-a-third-one and-so-on} % if you spot mis-hyphenations in your whole document, insert them here.
+
+
+
+\begin{document}
+%Userdefs (change these, as they will be inserted in various places e.g., title)
+\newcommand{\ThesisType}{Master Thesis} % or "Bachelor Thesis"
+\newcommand{\TheTitle}{Example Title}
+\newcommand{\TheSubTitle}{Example Subtitle}
+\newcommand{\TheAuthor}{Example Author}
+\newcommand{\Email}{\url{exampleEmail@cs.uni-kl.de}}
+\newcommand{\betreuerA}{Prof. Dr. My Example Prof}
+\newcommand{\betreuerB}{Dr. My Example Dr}
+\newcommand{\abgabedatum}{April\ 1st, 2011} % English date (same as German for German thesis)
+\newcommand{\abgabedatumDE}{1. April 2011} % German date (used in "erklaerung.tex")
+
+
+% don't change these or know what you do
+\subject{\ThesisType}
+\title{\TheTitle}
+\subtitle{\TheSubTitle}
+\author{\TheAuthor}
+\date{\abgabedatum}
+
+\hypersetup{pdftitle={\TheTitle: \TheSubTitle},
+            pdfauthor={\TheAuthor},
+            pdfcreator={\TheAuthor},
+            pdfsubject={\ThesisType} }
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              Usercommands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%Insert a footnote with reference to label including page numbers.
+\newcommand{\vgl}[1]{\footnote{sf. Chapter \vref{#1}.}}
+
+
+
+% editing & structuring
+\newcommand{\redline}[1]{\ignorespaces\begin{scriptsize}\begin{itemize}\setlength{\parskip}{0pt}%
+	\setlength{\parsep}{0pt}\color{darkred}#1\end{itemize}\end{scriptsize}\ignorespaces}
+% \newcommand{\redline}[1]{}
+
+% good for writing a quick outline into your thesis... for example like this:
+% \section{blabla}
+% \redline{\item first point i want to mention
+%          \item second point, etc.}
+% either comment out as soon as you have written the content of the section or just redefine redline to nothing as above (i like to comment things out more).
+
+
+
+\newcommand{\introduce}[1]{\emph{#1}\index{#1}} % first time you mention a specific concept (appears in index)
+\newcommand{\reuse}[1]{\emph{#1}\index{#1}} % if you want to add something to its definition or the like (reappears in index)
+
+\newcommand{\lastAccessed}{(last accessed: Jan.\ 23rd, 2011)} % e.g., for URIs
+
+% math formula:
+\newcommand{\lO}{\mathcal{O}} % Landau O
+
+% specifics (feel free to put a lot more here)
+\newcommand{\curie}[1]{\url{#1}} 
+\newcommand{\iri}[1]{<\url{#1}>}
+\newcommand{\iripart}[1]{\url{#1}}
+
+
+
+\frontmatter % switch scrbook parts
+
+\include{titlepage}
+
+% Abstracts part:
+% If you want English only don't touch.
+% If you want _additional_ German abstract: Uncomment everything below.
+% If you just want a German abstract: 
+% if you want abstracts on left and right page, look up what is commented out here
+%\cleardoubleevenemptypage
+\begingroup
+	\chapter{Abstract}
+	\input{abstract}
+	%\renewcommand*{\cleardoublepage}{\clearpage}
+	%\clearpage
+% 	\begin{otherlanguage}{ngerman} % uncomment this line if you need an additional
+	                               % German abstract in an English thesis
+% 	\chapter*{Zusammenfassung} % (also) uncomment if you need a German abstract
+% 	\input{astract-ger}        % ...
+% 	\end{otherlanguage}
+\endgroup
+%\cleardoubleevenemptypage
+
+\setcounter{tocdepth}{1} % so only chapters and sections (best imho)
+\tableofcontents
+
+% lists on one page
+\chapter{Lists}
+%\markboth{Lists}{Lists}
+\begingroup
+	\renewcommand*{\chapter}{\section}
+	\renewcommand*{\addchap}{\addsec}
+	%\renewcommand*{\markboth}[1]{\markright}
+	\renewcommand*{\listfigurename}{Figures}
+	\listoffigures
+	\renewcommand*{\listtablename}{Tables}
+	\listoftables
+	\renewcommand{\lstlistlistingname}{Listings}
+	\lstlistoflistings
+\endgroup
+
+\cleardoubleevenemptypage
+\mainmatter % switch scrbook parts, numbered: 1., 2., ...
+\acresetall
+
+\include{intro}
+\include{foundations}
+\include{relatedwork}
+\include{main} % possibly split up into several files
+%\include{otherfiles}
+\include{eval}
+\include{conclusion}
+
+%\nocite{*} % if you want to include everything from your library even if never \cited (usually bad idea)
+
+% some bibliographystyles you might want to give a try... i like mine better ;) (these just set the style for your library without including it)
+% \bibliographystyle{plainnat} % plain (and a lot)
+% \bibliographystyle{apalike} % a1 and a2; a1, a2, and a3 (lastname, f.)
+%\bibliographystyle{apalike2} % a1 & a2; a1, a2, & a3 (lastname, f.)
+% \bibliographystyle{newapa} %  a1 & a2; a1, a2, & a3 (lastname, f.)
+% \bibliographystyle{chicago} 
+% \bibliographystyle{named}
+
+\bibliographystyle{joernstyle} % based on apalike2 and plainnat, prints URLs for misc, works with mendeley bibtex exports
+
+% while writing you should use this
+\bibliography{library} % actually includes the library (here)
+% when your work is done, you should copy the thesis.bbl to
+% a file called bibFrozen.tex and include that, with that your thesis lib won't
+% change anymore, independently from possible changes to your library.bib or 
+% bibtex versions or styles or different platforms... you get it.
+%
+% Maybe even edit bibFrozen.tex if some things don't suit your taste
+%\include{bibFrozen}
+
+\appendix % switch scrbook parts, numbered: A, B, ...
+\begingroup
+	\renewcommand*{\cleardoublepage}{\clearpage}
+	\include{appendix} % e.g. smaller appendices
+	%\include{otherappendixfiles} % for example if you have lengthy tables or the like.
+\endgroup
+
+\backmatter % switch scrbook parts, unnumbered
+\include{acronyms} % include a list of acronyms here
+\printindex % include the index here
+
+% include the statement about doing the work yourself (if ngerman already you can leave the otherlanguage part)
+\begin{otherlanguage}{ngerman}
+	\include{erklaerung}
+\end{otherlanguage}
+
+\end{document}

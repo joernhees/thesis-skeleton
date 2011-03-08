@@ -1,0 +1,49 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+% \usepackage[absolute,showboxes]{textpos} % for trial (print on normal paper)
+\usepackage[absolute]{textpos} % for actual print (on red paper)
+
+% \setlength{\TPHorizModule}{1mm}
+% \setlength{\TPVertModule}{\TPHorizModule}
+
+
+
+\begin{document}
+
+% COPY THESE COMMANDS FROM YOUR thesis.tex !
+% then print to a normal page and see if it would fit
+
+\newcommand{\ThesisType}{Master Thesis} % or "Bachelor Thesis"
+\newcommand{\TheTitle}{Example Title}
+\newcommand{\TheSubTitle}{Example Subtitle}
+\newcommand{\TheAuthor}{Example Author}
+\newcommand{\Email}{\url{exampleEmail@cs.uni-kl.de}}
+\newcommand{\betreuerA}{Prof. Dr. My Example Prof}
+\newcommand{\betreuerB}{Dr. My Example Dr}
+\newcommand{\abgabedatum}{April\ 3st, 2011} % english date
+\newcommand{\abgabedatumDE}{1. April 2011} % german date (used in "erklaerung.tex")
+
+\thispagestyle{empty}
+\begin{textblock*}{13cm}(5cm,7.5cm)%
+	\noindent
+% \fbox{
+	\begin{minipage}[c][7.5cm][c]{13cm}
+		\begin{center}
+			\LARGE
+			\textbf{\TheTitle:\\
+			\Large \TheSubTitle}
+			
+			\large
+			
+			\vspace{2em}
+			\textbf{\TheAuthor}
+			
+			\vspace{2em}
+			\abgabedatum
+		\end{center}
+
+	\end{minipage}
+% }
+\end{textblock*}
+
+\end{document}
