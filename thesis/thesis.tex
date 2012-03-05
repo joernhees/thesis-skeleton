@@ -4,8 +4,8 @@
 % This is the main file for your thesis.
 % It mainly loads other things and gets the settings right.
 %
-% Before going on a word about editing latex:
-% - encoding: use utf8 encoding, no excuse. If your editor can't use another one.
+% Before going on, a word about editing latex:
+% - encoding: use utf8 encoding, no excuse. If your editor can't, use another one.
 % - revision control: you want it, it saves your life, no matter which one (i suggest git / mercurial)
 % 
 % Especially important with multiple authors:
@@ -22,7 +22,7 @@
 % Go through this file, it includes quite a lot of packages which you might want to use or not.
 % Below all the packages you'll find the \begin{document} line.
 % Underneath it insert your title, subtitle, name, supervisors, etc.
-% Then have a look into the files it includes (starting with abstract, etc.
+% Then have a look into the files it includes (starting with abstract, etc.)
 % 
 % A "how to find documentation" tip:
 % Usually you can quickly find help for some package by typing:
@@ -54,7 +54,7 @@
 \usepackage{scrhack} % some fixes for the scr-classes
 
 %\usepackage[german]{varioref} % References with page numbers
-\usepackage{varioref} % References with page numbers (use \vref instead of \ref)
+\usepackage{varioref} % References with page numbers (if you want that, use \vref instead of \ref)
 
 % \usepackage[printonlyused,withpage]{acronym}
 \usepackage{acronym} % acronyms, first occurrence will be expanded, all further just acronym + acronym table in appendix
@@ -63,10 +63,10 @@
 %\doublespacing
 %\onehalfspacing
 
-% für das Euro symbol (\euro{}) oder Beträge: \EUR{47,11}
+% for the Euro symbol (\euro{}) or currency amounts: \EUR{47,11}
 \usepackage{eurosym}
 
-% \usepackage{floatflt} %floating figures (Figures/Tables, surrounded by text)
+% \usepackage{floatflt} % floating figures (Figures/Tables, surrounded by text, most of the time a bad idea)
 \usepackage{subfigure} % multiple figures (and references in one figure)
 
 \usepackage{graphicx} % to import graphics
@@ -79,7 +79,7 @@
 
 % in case urls are included
 \usepackage{url}
-%\usepackage{hyperref} % clickable links
+%\usepackage{hyperref} % clickable links with funny color boxes... better use the config below
 \usepackage[colorlinks=true,
             linkcolor=black,
             anchorcolor=black,
@@ -178,7 +178,7 @@
 
 %\usepackage{bibgerm}
 %\usepackage{authordate1-4}
-\usepackage[square]{natbib} % use the natbib library package, see docs!
+\usepackage[square]{natbib} % use the natbib library package, see docs and the NICE TO KNOW section below! We use square brackets.
 %\bibpunct[,]{[}{]}{;}{a}{,}{,} %[notesep],open,close,citesep,style,aysep, yysep
 \renewcommand{\cite}{\citep} % by default use natbib's citep wherever we write \cite{...}
 
@@ -249,7 +249,7 @@
 
 
 
-%\hyphenation{My-word-which-shall-always-only-be-seperated-here and-another-word and-a-third-one and-so-on} % if you spot mis-hyphenations in your whole document, insert them here.
+%\hyphenation{My-word-which-shall-always-only-be-seperated-like-this and-another-word and-a-third-one and-so-on} % if you spot mis-hyphenations, insert them here.
 
 
 
@@ -260,10 +260,10 @@
 \newcommand{\TheSubTitle}{Example Subtitle}
 \newcommand{\TheAuthor}{Example Author}
 \newcommand{\Email}{\url{exampleEmail@cs.uni-kl.de}}
-\newcommand{\betreuerA}{Prof. Dr. My Example Prof}
-\newcommand{\betreuerB}{Dr. My Example Dr}
-\newcommand{\abgabedatum}{April\ 1st, 2011} % English date (same as German for German thesis)
-\newcommand{\abgabedatumDE}{1. April 2011} % German date (used in "erklaerung.tex")
+\newcommand{\supervisorA}{Prof. Dr. My Example Prof}
+\newcommand{\supervisorB}{Dr. My Example Dr}
+\newcommand{\submissiondate}{March\ 5th, 2012} % English date (same as German for German thesis)
+\newcommand{\submissiondateDE}{5. März 2012} % German date (used in "erklaerung.tex")
 
 
 % don't change these or know what you do
@@ -271,7 +271,7 @@
 \title{\TheTitle}
 \subtitle{\TheSubTitle}
 \author{\TheAuthor}
-\date{\abgabedatum}
+\date{\submissiondate}
 
 \hypersetup{pdftitle={\TheTitle: \TheSubTitle},
             pdfauthor={\TheAuthor},
@@ -311,7 +311,7 @@
 \newcommand{\introduce}[1]{\emph{#1}\index{#1}} % first time you mention a specific concept (appears in index)
 \newcommand{\reuse}[1]{\emph{#1}\index{#1}} % if you want to add something to its definition or the like (reappears in index)
 
-\newcommand{\lastAccessed}{(last accessed: Jan.\ 23rd, 2011)} % e.g., for URIs
+\newcommand{\lastAccessed}{(last accessed: Mar.\ 3rd, 2012)} % e.g., for URIs
 
 % math formula:
 \newcommand{\lO}{\mathcal{O}} % Landau O
@@ -376,7 +376,7 @@
 \include{eval}
 \include{conclusion}
 
-%\nocite{*} % if you want to include everything from your library even if never \cited (usually bad idea)
+%\nocite{*} % if you want to include everything from your library even if never \cited (usually a bad idea)
 
 % some bibliographystyles you might want to give a try... i like mine better ;) (these just set the style for your library without including it)
 % \bibliographystyle{plainnat} % plain (and a lot)
@@ -391,7 +391,7 @@
 % while writing you should use this
 \bibliography{library} % actually includes the library (here)
 % when your work is done, you should copy the thesis.bbl to
-% a file called bibFrozen.tex and include that, with that your thesis lib won't
+% a file called bibFrozen.tex and include that. By that your thesis lib won't
 % change anymore, independently from possible changes to your library.bib or 
 % bibtex versions or styles or different platforms... you get it.
 %
