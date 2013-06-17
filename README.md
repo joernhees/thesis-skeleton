@@ -1,3 +1,6 @@
+# Deprecated
+I'd highly recommend looking into the cooler [classicthesis](https://github.com/classicthesis/classicthesis) template;)
+
 # Thesis skeleton
 In this project you can find an easy to start with LaTeX skeleton for a bachelor / master thesis.
 
